@@ -1,0 +1,3 @@
+*.py[cod]
+.htaccess
+passenger_wsgi.py
