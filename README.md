@@ -29,15 +29,15 @@ Installation
 
 2) Get the data from http://snap.uaf.edu
 
-3) Copy `config.py.default` to `config.py`, edit the parameters to suit your needs
+3) Copy `config.py.default` to `config.py`, edit the parameters to suit your needs.
 
-4) Launch a python interpreter and populate the database with data necessary for SNAPIndices to work
+4) Launch a python interpreter and populate the database with data:
 
     $ python
     >>> import snapindices
     >>> snapindices.database.init_db()
 
-5) Launch the application with
+5) Launch the application with:
 
     $ ./run.py
 
@@ -45,5 +45,5 @@ Installation
 Contact
 -------
 
-Do you have an idea for a feature request? Find a Bug?
+Do you have an idea for a feature? Find a bug?
 Reach me at [matthewrdillon@gmail.com](mailto:matthewrdillon@gmail.com)
