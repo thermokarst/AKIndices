@@ -11,7 +11,7 @@ What is it?
 Prerequisites
 -------------
 
-- SNAPExtract
+- [SNAPExtract](http://github.com/thermokarst/snapextract)
 - Flask (0.10.1)
 - SQLAlchemy (0.8.2)
 - psycopg2 (2.5.1)
