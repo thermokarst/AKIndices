@@ -25,7 +25,7 @@ def index():
             return redirect('/')
         else:
             return render_template("index.html",
-            title = "SNAPIndices",
+            title = application.config['TITLE'],
             form = form,
             )
 
@@ -57,7 +57,7 @@ def index():
                 session['des_indices'] = des_air_indices(indices)
 
         return render_template("index.html",
-            title = "SNAPIndices",
+            title = application.config['TITLE'],
             form = form
             )
 
@@ -98,7 +98,7 @@ def delete():
 @application.route('/datatypes')
 def datatypes():
     return render_template("datatypes.html",
-        title="SNAPIndices")
+        title=application.config['TITLE'])
 
 @application.route('/details')
 def details():
@@ -114,7 +114,7 @@ def details():
         lon=request.args.get('lon', ''),
         community_name=request.args.get('name', ''),
         temps=temps,
-        title="SNAPIndices")
+        title=application.config['TITLE'])
 
 @application.teardown_appcontext
 def shutdown_session(exception=None):
@@ -151,9 +151,9 @@ def log_request():
 @application.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html',
-                           title="SNAPIndices"), 404
+                           title=application.config['TITLE']), 404
 
 @application.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html',
-                           title="SNAPIndices"), 500
+                           title=application.config['TITLE']), 500
