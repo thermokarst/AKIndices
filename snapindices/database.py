@@ -60,7 +60,7 @@ def init_db():
             endyr = 2099
         starttime = datetime.datetime.now()
         print datetime.datetime.now().strftime('%m-%d-%Y %I:%M%p')
-        print filename, startyr, endyr, dataset.model, dataset.scenario
+        print filename, startyr, endyr, dataset.model, dataset.scenario, dataset.resolution
 
         extracted_temps = dataset.extract_points(northings, eastings,
                                                  startyr, endyr)
@@ -75,11 +75,12 @@ def init_db():
                                               models.Dataset.scenario == dataset.scenario).first()
 
         if dataset_sql is None:
-            print "not in dataset...", (dataset.model, dataset.scenario)
+            print "not in dataset table...", (dataset.model, dataset.scenario)
             dataset_sql = models.Dataset(datasetType,
                              dataset.model,
                              modelnames[dataset.model],
-                             dataset.scenario)
+                             dataset.scenario,
+                             dataset.resolution)
             db_session.add(dataset_sql)
             datasets.append((dataset.model, dataset.scenario))
             db_session.commit()

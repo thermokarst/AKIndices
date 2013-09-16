@@ -17,6 +17,7 @@ class SNAPYearField(IntegerField):
             self.validators = [validators.NumberRange(min=ymin, max=ymax),
                                validators.Required()]
 
+
 def communities():
     return Community.query.order_by('name')
 
@@ -24,10 +25,11 @@ def datasets():
     return Dataset.query.order_by('datatype', 'model', 'scenario')
 
 def dataset_names(ds):
-    return "{type} - {modelname} {scenario}".format(modelname=ds.modelname,
-                                                      scenario=ds.scenario,
-                                                      type=ds.datatype.lower()\
-                                                           .capitalize())
+    return "{type} ({resolution}) - {modelname} {scenario}".format(modelname=ds.modelname,
+                                                                   scenario=ds.scenario,
+                                                                   type=ds.datatype.lower()\
+                                                                        .capitalize(),
+                                                                   resolution=ds.resolution)
 
 class SNAPForm(Form):
     community = QuerySelectField(query_factory=communities,

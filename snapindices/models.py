@@ -90,18 +90,21 @@ class Dataset(Base):
     model = Column(String(15), nullable=False)
     modelname = Column(String(50), nullable=True)
     scenario = Column(String(15), nullable=False)
+    resolution = Column(String(15), nullable=False)
 
     temperatures = relationship("Temperature", backref='datasets')
 
-    def __init__(self, datatype, model, modelname, scenario):
+    def __init__(self, datatype, model, modelname, scenario, resolution):
         self.datatype = datatype
         self.model = model
         self.modelname = modelname
         self.scenario = scenario
+        self.resolution = resolution
 
     def __repr__(self):
         return "Dataset{data}".format(data=(self.datatype, self.model,
-                                            self.modelname, self.scenario))
+                                            self.modelname, self.scenario,
+                                            self.resolution))
 
 
 class Temperature(Base):
