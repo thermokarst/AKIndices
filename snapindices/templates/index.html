@@ -45,7 +45,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group col-md-4">
-                <input type="submit" name="submit" class="btn btn-primary form-control" value="Get Temperatures" >
+                <input type="submit" name="submit" class="btn btn-primary form-control"
+                       value="Get Temperatures" >
             </div>
             <div class="form-group col-md-4">
                 <input type="button" name="reset" class="btn btn-danger form-control"
@@ -157,6 +158,12 @@
                     {% endif %}
                 </tbody>
             </table>
+        <strong>
+        NOTE: The parameters calculated by SNAPIndices are based on average monthly temperatures,
+        not average daily temperatures. As well, derived data is provided without any rounding or
+        consideration for significant digits, allowing the user to decide what is appropriate for
+        their analysis.
+        </strong>
         </div>
 
 <div align="justify">
@@ -199,6 +206,9 @@
       <a href="http://github.com/thermokarst/snapextract">SNAPExtract</a> and
       <a href="http://github.com/thermokarst/snapindices">SNAPIndices</a> for more info
       on how to install on your own machine, fork the project, or submit bug reports.
+      In a nutshell, SNAPExtract takes a list of communities and their coordinates, as well as SNAP datasets,
+      and extracts the air temperature data from the data point closest to a community's location. SNAPIndices
+      is the front-end for interacting with that extracted data.
   </dd>
   <dt>Who</dt>
   <dd>This project would not exist without <a href="http://www.snap.uaf.edu">SNAP</a> &ndash; take a look at their
