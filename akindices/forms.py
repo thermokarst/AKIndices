@@ -3,10 +3,10 @@
 from flask_wtf import Form
 from wtforms import validators, ValidationError, IntegerField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from snapindices.models import Community, Dataset, Temperature
+from akindices.models import Community, Dataset, Temperature
 from sqlalchemy import func
 
-class SNAPYearField(IntegerField):
+class AKIYearField(IntegerField):
     def pre_validate(self, form):
         if form.model.data is not None:
             ymin,ymax = Temperature.query \
@@ -31,16 +31,16 @@ def dataset_names(ds):
                                                                         .capitalize(),
                                                                    resolution=ds.resolution)
 
-class SNAPForm(Form):
+class AKIForm(Form):
     community = QuerySelectField(query_factory=communities,
                                  get_label='name',
                                  allow_blank=True,
                                  blank_text=u'---Select a community---',
                                  validators=[validators.Required(message='Please select a community')])
 
-    minyear = SNAPYearField(u'minyear')
+    minyear = AKIYearField(u'minyear')
 
-    maxyear = SNAPYearField(u'maxyear')
+    maxyear = AKIYearField(u'maxyear')
 
     model = QuerySelectField(query_factory=datasets,
                              get_label=dataset_names,

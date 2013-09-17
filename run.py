@@ -1,5 +1,5 @@
 #!/usr/bin/env python
 
-from snapindices import application
+from akindices import application
 
 application.run()

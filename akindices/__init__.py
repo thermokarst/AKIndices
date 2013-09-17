@@ -17,4 +17,4 @@ if not application.debug:
     file_handler.setFormatter(logging.Formatter(format))
     application.logger.addHandler(file_handler)
 
-from snapindices import views
+from akindices import views

@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, jsonify, request, flash, redirect, url_for, session, current_app
-from snapindices import application
-from snapindices.database import db_session
-from snapindices.models import Community, Temperature, Dataset
-from forms import SNAPForm
+from akindices import application
+from akindices.database import db_session
+from akindices.models import Community, Temperature, Dataset
+from forms import AKIForm
 from numpy import zeros, arange, hstack
 from processing import ann_air_indices, avg_air_indices, des_air_indices, avg_air_temp, c_to_f
 
 @application.route('/', methods = ['GET', 'POST'])
 def index():
-    form = SNAPForm()
+    form = AKIForm()
 
     # Deal with form posting here
     if request.method == 'POST':

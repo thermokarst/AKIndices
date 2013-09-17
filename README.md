@@ -1,17 +1,17 @@
-SNAPIndices --- Alaska climate data
-===================================
+AKIndices --- Alaska climate data
+=================================
 
 Air temperature data from over 400 communities, reduced to relevant engineering parameters.
 
 What is it?
 -----------
 
-[SNAPIndices](http://snapindices.akdillon.net) is a Flask-driven web-app that builds on the SNAPExtract project to provide an easy-to-use interface for working with SNAP datasets.
+[AKIndices](http://akindices.akdillon.net) is a Flask-driven web-app that builds on the AKExtract project to provide an easy-to-use interface for working with SNAP datasets.
 
 Prerequisites
 -------------
 
-- [SNAPExtract](http://github.com/thermokarst/snapextract)
+- [AKExtract](http://github.com/thermokarst/akextract)
 - Flask (0.10.1)
 - SQLAlchemy (0.8.2)
 - psycopg2 (2.5.1)
@@ -25,7 +25,7 @@ Installation
 
 1) Clone the repo:
 
-    git clone https://github.com/thermokarst/snapindices
+    git clone https://github.com/thermokarst/akindices
 
 2) Get the data from http://snap.uaf.edu
 
@@ -34,8 +34,8 @@ Installation
 4) Launch a python interpreter and populate the database with data:
 
     $ python
-    >>> import snapindices
-    >>> snapindices.database.init_db()
+    >>> import akindices
+    >>> akindices.database.init_db()
 
 5) Launch the application with:
 
@@ -46,4 +46,4 @@ Contact
 -------
 
 Do you have an idea for a feature? Find a bug?
-Reach me at [matthewrdillon@gmail.com](mailto:matthewrdillon@gmail.com)
+Reach me at [mrdillon@alaska.edu](mailto:mrdillon@alaska.edu)

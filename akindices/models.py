@@ -3,7 +3,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, Float, String, DateTime, create_engine
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.schema import Index
-from snapindices.database import Base
+from akindices.database import Base
 
 
 class UniqueMixin(object):

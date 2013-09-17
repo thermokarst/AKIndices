@@ -3,7 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from snapindices import application
+from akindices import application
 import os
 
 engine = create_engine(application.config['ENGINE'],
@@ -18,7 +18,7 @@ Base.query = db_session.query_property()
 def init_db():
     tempsnap = application.config['SNAPDATA']
 
-    import snapextract
+    import akextract
     import numpy
     import models
     import datetime
@@ -52,7 +52,7 @@ def init_db():
     Base.metadata.create_all(bind=engine)
 
     for filename in datafiles:
-        dataset = snapextract.GeoRefData(os.path.join(tempsnap, filename))
+        dataset = akextract.GeoRefData(os.path.join(tempsnap, filename))
         tokens = filename.split('_')
         startyr = int(tokens[-2])
         endyr = int(tokens[-1].split('.')[0])
@@ -91,7 +91,7 @@ def init_db():
         time_years = max_year - min_year + 1
         i = 0
         for community in communities:
-            longitude, latitude, elev = snapextract.ne_to_wgs(northings[i], eastings[i])
+            longitude, latitude, elev = akextract.ne_to_wgs(northings[i], eastings[i])
             location = models.Community.as_unique(db_session, name=community,
                                                     northing=northings[i],
                                                     easting=eastings[i],
