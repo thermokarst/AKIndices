@@ -6,7 +6,8 @@ Air temperature data from over 400 communities, reduced to relevant engineering 
 What is it?
 -----------
 
-[AKIndices](http://akindices.akdillon.net) is a Flask-driven web-app that builds on the AKExtract project to provide an easy-to-use interface for working with SNAP datasets.
+[AKIndices](http://akindices.akdillon.net) is a Flask-driven web-app that builds on
+the AKExtract project to provide an easy-to-use interface for working with SNAP datasets.
 
 Prerequisites
 -------------
