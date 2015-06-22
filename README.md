@@ -1,13 +1,15 @@
 AKIndices --- Alaska climate data
 =================================
 
-Air temperature data from over 400 communities, reduced to relevant engineering parameters.
+Air temperature data from over 400 communities, reduced to relevant engineering
+parameters.
 
 What is it?
 -----------
 
-[AKIndices](http://akindices.akdillon.net) is a Flask-driven web-app that builds on
-the AKExtract project to provide an easy-to-use interface for working with SNAP datasets.
+[AKIndices](http://akindices.akdillon.net) is a Flask-driven web-app that
+builds on the AKExtract project to provide an easy-to-use interface for working
+with SNAP datasets.
 
 Prerequisites
 -------------
@@ -26,7 +28,7 @@ Installation
 
 1) Clone the repo:
 
-    git clone https://github.com/thermokarst/akindices
+    $ git clone https://github.com/thermokarst/akindices
 
 2) Get the data from http://snap.uaf.edu
 
