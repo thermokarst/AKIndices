@@ -10,6 +10,8 @@ manager = Manager(app)
 
 @manager.command
 def initdb():
+    # Need to import models in order for Flask-SQLAlchemy to create them
+    from app.models import Community, Dataset, Temperature
     db.create_all(app=app)
 
 

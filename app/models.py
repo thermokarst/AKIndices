@@ -16,7 +16,7 @@ class Community(db.Model):
 class Dataset(db.Model):
     __tablename__ = 'datasets'
 
-    id           = db.Column(db.Integer, primary_key=True
+    id           = db.Column(db.Integer, primary_key=True)
     datatype     = db.Column(db.String(15), nullable=False)
     model        = db.Column(db.String(15), nullable=False)
     modelname    = db.Column(db.String(50), nullable=False)

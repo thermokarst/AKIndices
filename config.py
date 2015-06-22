@@ -16,7 +16,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'top secret'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-            'postgres://user:pass@localhost/akindices'
+            'postgres://postgres@localhost/akindices'
 
 
 config = {
