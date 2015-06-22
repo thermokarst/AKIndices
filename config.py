@@ -7,9 +7,20 @@ class Config:
     APP_NAME = 'AKIndices'
     APP_VERSION = '0.2.0'
 
+    @staticmethod
+    def init_app(app):
+        pass
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'top secret'
-    DATABASE_URL = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+            'postgres://user:pass@localhost/akindices'
 
+
+config = {
+    'development': DevelopmentConfig,
+
+    'default': DevelopmentConfig
+}
