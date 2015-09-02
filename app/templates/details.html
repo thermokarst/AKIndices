@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
+<h2>{{ community_name }}</h4>
+
+<div id="map" style="width: 500px; height: 300px"></div>
+<br>
+
+<h3>Monthly Temperatures</h3>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>Year<br>&nbsp;</th>
+                <th>January<br>&deg;C</th>
+                <th>February<br>&deg;C</th>
+                <th>March<br>&deg;C</th>
+                <th>April<br>&deg;C</th>
+                <th>May<br>&deg;C</th>
+                <th>June<br>&deg;C</th>
+                <th>July<br>&deg;C</th>
+                <th>August<br>&deg;C</th>
+                <th>September<br>&deg;C</th>
+                <th>October<br>&deg;C</th>
+                <th>November<br>&deg;C</th>
+                <th>December<br>&deg;C</th>
+            </tr>
+        </thead>
+        <tbody>
+           {% for temp in temps %}
+         <tr>
+          <td>{{ temp[0]|int }}</td>
+          <td>{{ temp[1]|round(2) }}</td>
+          <td>{{ temp[2]|round(2) }}</td>
+          <td>{{ temp[3]|round(2) }}</td>
+          <td>{{ temp[4]|round(2) }}</td>
+          <td>{{ temp[5]|round(2) }}</td>
+          <td>{{ temp[6]|round(2) }}</td>
+          <td>{{ temp[7]|round(2) }}</td>
+          <td>{{ temp[8]|round(2) }}</td>
+          <td>{{ temp[9]|round(2) }}</td>
+          <td>{{ temp[10]|round(2) }}</td>
+          <td>{{ temp[11]|round(2) }}</td>
+          <td>{{ temp[12]|round(2) }}</td>
+         </tr>
+       {% endfor %}
+   </tbody>
+
+</table>
+
+
+<script>
+var map = L.map('map').setView([{{ lat }}, {{ lon }}], 5);
+L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+    maxZoom: 18,
+    attribution: '{{ community_name }}, AK'
+}).addTo(map);
+var marker_1 = L.marker([{{ lat }}, {{ lon }}]);
+marker_1.bindPopup("{{ community_name }}, AK<br>{{ lat }}&deg; N, {{ lon }}&deg; W");
+map.addLayer(marker_1)
+</script>
+
+{% endblock %}
