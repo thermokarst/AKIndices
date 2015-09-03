@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main/base.html" %}
 {% block content %}
 
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
@@ -31,26 +31,24 @@
         </thead>
         <tbody>
            {% for temp in temps %}
-         <tr>
-          <td>{{ temp[0]|int }}</td>
-          <td>{{ temp[1]|round(2) }}</td>
-          <td>{{ temp[2]|round(2) }}</td>
-          <td>{{ temp[3]|round(2) }}</td>
-          <td>{{ temp[4]|round(2) }}</td>
-          <td>{{ temp[5]|round(2) }}</td>
-          <td>{{ temp[6]|round(2) }}</td>
-          <td>{{ temp[7]|round(2) }}</td>
-          <td>{{ temp[8]|round(2) }}</td>
-          <td>{{ temp[9]|round(2) }}</td>
-          <td>{{ temp[10]|round(2) }}</td>
-          <td>{{ temp[11]|round(2) }}</td>
-          <td>{{ temp[12]|round(2) }}</td>
-         </tr>
+                <tr>
+                    <td>{{ temp[0]|int }}</td>
+                    <td>{{ temp[1]|round(2) }}</td>
+                    <td>{{ temp[2]|round(2) }}</td>
+                    <td>{{ temp[3]|round(2) }}</td>
+                    <td>{{ temp[4]|round(2) }}</td>
+                    <td>{{ temp[5]|round(2) }}</td>
+                    <td>{{ temp[6]|round(2) }}</td>
+                    <td>{{ temp[7]|round(2) }}</td>
+                    <td>{{ temp[8]|round(2) }}</td>
+                    <td>{{ temp[9]|round(2) }}</td>
+                    <td>{{ temp[10]|round(2) }}</td>
+                    <td>{{ temp[11]|round(2) }}</td>
+                    <td>{{ temp[12]|round(2) }}</td>
+                </tr>
        {% endfor %}
    </tbody>
-
 </table>
-
 
 <script>
 var map = L.map('map').setView([{{ lat }}, {{ lon }}], 5);

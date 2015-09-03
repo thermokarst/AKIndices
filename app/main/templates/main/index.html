@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% from "_formhelpers.html" import render_field %}
+{% extends "main/base.html" %}
+{% from "main/_formhelpers.html" import render_field %}
 {% block content %}
 
 <p class="lead" align="justify">
@@ -46,7 +46,7 @@
         <div class="col-md-12">
             <div class="form-group col-md-4">
                 <input type="submit" name="submit" class="btn btn-primary form-control"
-                       value="Get Temperatures" >
+                       value="Get Temperatures" />
             </div>
             <div class="form-group col-md-4">
                 <input type="button" name="reset" class="btn btn-danger form-control"
@@ -112,11 +112,6 @@
                         </td>
                     </tr>
                     {% endif %}
-                    {#
-                    <tr>
-                        <td colspan="9">&nbsp;</td>
-                    </tr>
-                    #}
                     <tr class="active">
                         <td colspan="9" align="center">
                             Saved Searches

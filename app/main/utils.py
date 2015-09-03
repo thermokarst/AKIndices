@@ -1,22 +1,22 @@
 import numpy
 
-from app.models import Temperature, Dataset
+from .models import Temperature, Dataset
 
 
 def getTemps(datasets, community_id, minyear, maxyear):
     temps = Temperature.query.join(Dataset). \
-            filter(Dataset.id == Temperature.dataset_id,
-                   Dataset.id == datasets,
-                   Temperature.community_id == community_id,
-                   Temperature.year >= minyear,
-                   Temperature.year <= maxyear)
+        filter(Dataset.id == Temperature.dataset_id,
+               Dataset.id == datasets,
+               Temperature.community_id == community_id,
+               Temperature.year >= minyear,
+               Temperature.year <= maxyear)
 
     length = int(maxyear) - int(minyear)
     temps_arr = numpy.zeros((length+1, 12))
 
     i = 0
     for t in temps.all():
-        temps_arr[i,:] =  [t.january, t.february, t.march,
+        temps_arr[i, :] = [t.january, t.february, t.march,
                            t.april, t.may, t.june,
                            t.july, t.august, t.september,
                            t.october, t.november, t.december]
@@ -58,8 +58,8 @@ def avg_air_indices(indices):
 
 def des_air_indices(indices):
     if indices.shape[0] > 2:
-        ati = numpy.sort(indices[:,0])
-        afi = numpy.sort(indices[:,1])
+        ati = numpy.sort(indices[:, 0])
+        afi = numpy.sort(indices[:, 1])
         dti = (ati[-1] + ati[-2] + ati[-3]) / 3.0
         dfi = (afi[0] + afi[1] + afi[2]) / 3.0
         return (int(dti), int(dfi))

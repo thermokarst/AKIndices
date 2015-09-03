@@ -2,8 +2,9 @@ from flask_wtf import Form
 from wtforms import IntegerField
 from wtforms.validators import NumberRange, Required
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from app.models import Community, Dataset, Temperature
 from sqlalchemy import func
+
+from .models import Community, Dataset, Temperature
 
 
 class AKIYearField(IntegerField):
