@@ -10,9 +10,19 @@ manager = Manager(app)
 
 @manager.command
 def initdb():
-    # Need to import models in order for Flask-SQLAlchemy to create them
-    from app.main.models import Community, Dataset, Temperature
-    db.create_all(app=app)
+    from sqlalchemy.sql import text
+    cmd = """
+        CREATE TABLE new_communities (
+            id serial NOT NULL,
+            name character varying(50) NOT NULL,
+            northing double precision NOT NULL,
+            easting double precision NOT NULL,
+            latitude double precision NOT NULL,
+            longitude double precision NOT NULL,
+            data jsonb NOT NULL,
+            CONSTRAINT new_communities_pkey PRIMARY KEY (id)
+        );"""
+    _ = db.engine.execute(text(cmd))
 
 
 if __name__ == '__main__':
