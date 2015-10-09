@@ -1,6 +1,6 @@
 import numpy
 
-from .models import Temperature, Dataset
+from .models import Temperature, Dataset, DB
 
 
 def getTemps(datasets, community_id, minyear, maxyear):
@@ -69,3 +69,6 @@ def des_air_indices(indices):
 
 def c_to_f(temp):
     return (temp * 9. / 5.) + 32.
+
+def communitiesSelect():
+    return [(c.id, c.name) for c in DB.getCommunities()]

@@ -1,10 +1,10 @@
 from flask_wtf import Form
-from wtforms import IntegerField
+from wtforms import IntegerField, SelectField
 from wtforms.validators import NumberRange, Required
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from sqlalchemy import func
 
-from .models import Community, Dataset, Temperature
+from .models import Dataset, Temperature, DB
 
 
 class AKIYearField(IntegerField):
@@ -17,10 +17,6 @@ class AKIYearField(IntegerField):
             self.validators = [NumberRange(min=ymin, max=ymax), Required()]
 
 
-def communities():
-    return Community.query.order_by('name')
-
-
 def datasets():
     return Dataset.query.order_by('datatype', 'model', 'scenario')
 
@@ -30,11 +26,8 @@ def dataset_names(ds):
 
 
 class AKIForm(Form):
-    community = QuerySelectField(query_factory=communities,
-                                 get_label='name',
-                                 allow_blank=True,
-                                 blank_text='---Select a community---',
-                                 validators=[Required(message='Please select a community')])
+    community = SelectField(coerce=int,
+                            validators=[Required(message='Please select a community')])
 
     minyear = AKIYearField('minyear')
     maxyear = AKIYearField('maxyear')

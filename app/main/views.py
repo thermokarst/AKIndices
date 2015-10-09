@@ -5,13 +5,13 @@ from flask import session, render_template, request, redirect, url_for
 from . import main
 from .forms import AKIForm
 from .utils import getTemps, avg_air_temp, ann_air_indices, \
-    avg_air_indices, des_air_indices
-from .models import Community, Dataset
-
+    avg_air_indices, des_air_indices, communitiesSelect
+from .models import Dataset, DB
 
 @main.route('/', methods=['GET'])
 def index():
     form = AKIForm()
+    form.community.choices = communitiesSelect()
     session['community_data'] = None
     session['avg_temp'] = None
     session['avg_indices'] = None
@@ -20,13 +20,13 @@ def index():
     if 'community' in session:
         community_id = session['community']
         if all(key in session for key in ('minyear', 'maxyear', 'datasets')):
-            community = Community.query.get_or_404(community_id)
+            community = DB.getCommunity(community_id)
 
             session['community_data'] = {
                 'id': community_id,
-                'name': community.name,
-                'latitude': round(community.latitude, 5),
-                'longitude': round(community.longitude, 5),
+                'name': community['name'],
+                'latitude': round(community['latitude'], 5),
+                'longitude': round(community['longitude'], 5),
             }
 
             session['ds_name'] = Dataset.query. \
@@ -48,6 +48,7 @@ def index():
 @main.route('/', methods=['POST'])
 def index_submit():
     form = AKIForm()
+    form.community.choices = communitiesSelect()
     if form.validate():
         session['community'] = request.form['community']
         session['minyear'] = request.form['minyear']
@@ -58,7 +59,7 @@ def index_submit():
         session['datasets'] = request.form['model']
         return redirect(url_for('main.index'))
     else:
-        return render_template("main/index.html", form=form)
+        return render_template('main/index.html', form=form)
 
 
 @main.route('/datatypes')

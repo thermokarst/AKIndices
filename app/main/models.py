@@ -1,17 +1,7 @@
 from app import db
 from sqlalchemy.ext.hybrid import hybrid_property
-
-
-class Community(db.Model):
-    __tablename__ = 'communities'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
-    northing = db.Column(db.Float, nullable=False)
-    easting = db.Column(db.Float, nullable=False)
-    latitude = db.Column(db.Float, nullable=False)
-    longitude = db.Column(db.Float, nullable=False)
-    temperatures = db.relationship('Temperature', backref='communities')
+from sqlalchemy.sql import text
+from flask import abort
 
 
 class Dataset(db.Model):
@@ -50,3 +40,25 @@ class Temperature(db.Model):
     november = db.Column(db.Float, nullable=False)
     december = db.Column(db.Float, nullable=False)
     updated = db.Column(db.DateTime, nullable=True)
+
+
+class DB:
+    @classmethod
+    def getCommunity(cls, id):
+        cmd = """
+            SELECT id, name, latitude, longitude, northing, easting
+            FROM new_communities
+            WHERE id=:id;
+            """
+        result = db.engine.execute(text(cmd), id=id).fetchone()
+        return result or abort(500)
+
+    @classmethod
+    def getCommunities(cls):
+        cmd = """
+            SELECT id, name
+            FROM new_communities
+            ORDER BY name ASC;
+            """
+        result = db.engine.execute(text(cmd), id=id).fetchall()
+        return result or abort(500)
