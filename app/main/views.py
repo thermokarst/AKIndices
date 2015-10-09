@@ -8,6 +8,7 @@ from .utils import getTemps, avg_air_temp, ann_air_indices, \
     avg_air_indices, des_air_indices, communitiesSelect
 from .models import Dataset, DB
 
+
 @main.route('/', methods=['GET'])
 def index():
     form = AKIForm()
@@ -42,7 +43,7 @@ def index():
             session['avg_indices'] = avg_air_indices(indices)
             session['des_indices'] = des_air_indices(indices)
 
-    return render_template("main/index.html", form=form)
+    return render_template('main/index.html', form=form)
 
 
 @main.route('/', methods=['POST'])
@@ -64,7 +65,7 @@ def index_submit():
 
 @main.route('/datatypes')
 def datatypes():
-    return render_template("main/datatypes.html")
+    return render_template('main/datatypes.html')
 
 
 @main.route('/reset')
@@ -83,7 +84,7 @@ def details():
     years = arange(int(minyear),
                    int(maxyear)+1).reshape(int(maxyear)-int(minyear) + 1, 1)
     temps = hstack((years, temps))
-    return render_template("main/details.html",
+    return render_template('main/details.html',
                            lat=request.args.get('lat', ''),
                            lon=request.args.get('lon', ''),
                            community_name=request.args.get('name', ''),
