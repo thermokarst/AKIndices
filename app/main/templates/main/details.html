@@ -1,0 +1,64 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
+<h2>{{ community_name }}</h4>
+
+<div id="map" style="width: 500px; height: 300px"></div>
+<br>
+
+<h3>Monthly Temperatures</h3>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-1">Year<br>&nbsp;</th>
+                <th class="col-md-1">January<br>&deg;C</th>
+                <th class="col-md-1">February<br>&deg;C</th>
+                <th class="col-md-1">March<br>&deg;C</th>
+                <th class="col-md-1">April<br>&deg;C</th>
+                <th class="col-md-1">May<br>&deg;C</th>
+                <th class="col-md-1">June<br>&deg;C</th>
+                <th class="col-md-1">July<br>&deg;C</th>
+                <th class="col-md-1">August<br>&deg;C</th>
+                <th class="col-md-1">September<br>&deg;C</th>
+                <th class="col-md-1">October<br>&deg;C</th>
+                <th class="col-md-1">November<br>&deg;C</th>
+                <th class="col-md-1">December<br>&deg;C</th>
+            </tr>
+        </thead>
+        <tbody>
+           {% for temp in temps %}
+                <tr>
+                    <td>{{ temp[0] }}</td>
+                    <td>{{ temp[1][0] }}</td>
+                    <td>{{ temp[1][1] }}</td>
+                    <td>{{ temp[1][2] }}</td>
+                    <td>{{ temp[1][3] }}</td>
+                    <td>{{ temp[1][4] }}</td>
+                    <td>{{ temp[1][5] }}</td>
+                    <td>{{ temp[1][6] }}</td>
+                    <td>{{ temp[1][7] }}</td>
+                    <td>{{ temp[1][8] }}</td>
+                    <td>{{ temp[1][9] }}</td>
+                    <td>{{ temp[1][10] }}</td>
+                    <td>{{ temp[1][11] }}</td>
+                </tr>
+       {% endfor %}
+   </tbody>
+</table>
+
+<script>
+var map = L.map('map').setView([{{ lat }}, {{ lon }}], 5);
+L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+    maxZoom: 18,
+    attribution: '{{ community_name }}, AK'
+}).addTo(map);
+var marker_1 = L.marker([{{ lat }}, {{ lon }}]);
+marker_1.bindPopup("{{ community_name }}, AK<br>{{ lat }}&deg; N, {{ lon }}&deg; W");
+map.addLayer(marker_1)
+</script>
+
+{% endblock %}

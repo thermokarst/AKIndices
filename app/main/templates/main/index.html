@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% from "_formhelpers.html" import render_field %}
+{% extends "main/base.html" %}
+{% from "main/_formhelpers.html" import render_field %}
 {% block content %}
 
 <p class="lead" align="justify">
@@ -19,9 +19,9 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="modelinput">Dataset</label>
-                {{ render_field(form.model, class='form-control', id='modelinput') }}
+                {{ render_field(form.dataset, class='form-control', id='modelinput') }}
                     <small>Historical (1901-2009) or Projection (2001-2099)<br>
-                    <a href="{{ url_for('datatypes') }}" target="_blank">
+                    <a href="{{ url_for('main.datatypes') }}" target="_blank">
                     Learn more about the models and scenarios
                 </a></small>
             </div>
@@ -46,11 +46,11 @@
         <div class="col-md-12">
             <div class="form-group col-md-4">
                 <input type="submit" name="submit" class="btn btn-primary form-control"
-                       value="Get Temperatures" >
+                       value="Get Temperatures" />
             </div>
             <div class="form-group col-md-4">
                 <input type="button" name="reset" class="btn btn-danger form-control"
-                       onclick="window.location.href='{{ url_for('reset') }}'"
+                       onclick="window.location.href='{{ url_for('main.reset') }}'"
                        value="Clear All Data" />
             </div>
         </div>
@@ -81,7 +81,7 @@
                     </tr>
                     {% if session['avg_temp'] %}
                     <tr>
-                        <td><a href="{{ url_for('details', lat=session['community_data']['latitude'],
+                        <td><a href="{{ url_for('main.details', lat=session['community_data']['latitude'],
                                         lon=session['community_data']['longitude'],
                                         name=session['community_data']['name'],
                                         datasets=session['datasets'],
@@ -98,9 +98,9 @@
                         <td>{{ session['avg_indices'][1] }}</td>
                         <td>{{ session['des_indices'][0] }}</td>
                         <td>{{ session['des_indices'][1] }}</td>
-                        <td>{{ session['ds_name'][0][0] }} ({{ session['ds_name'][0][1] }})</td>
+                        <td>{{ session['ds_name'][0] }} ({{ session['ds_name'][1] }})</td>
                         <td><button type="button" class="btn btn-success btn-sm"
-                                    onclick="window.location.href='{{ url_for('save') }}'"
+                                    onclick="window.location.href='{{ url_for('main.save') }}'"
                                     title="Click to save this search">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                             </button></td>
@@ -112,11 +112,6 @@
                         </td>
                     </tr>
                     {% endif %}
-                    {#
-                    <tr>
-                        <td colspan="9">&nbsp;</td>
-                    </tr>
-                    #}
                     <tr class="active">
                         <td colspan="9" align="center">
                             Saved Searches
@@ -125,7 +120,7 @@
                     {% if session.save %}
                     {% for key, value in session.save|dictsort %}
                     <tr>
-                        <td><a href="{{ url_for('details', lat=value['community_data']['latitude'],
+                        <td><a href="{{ url_for('main.details', lat=value['community_data']['latitude'],
                                         lon=value['community_data']['longitude'],
                                         name=value['community_data']['name'],
                                         datasets=value['datasets'],
@@ -142,9 +137,9 @@
                         <td>{{ value['avg_indices'][1] }}</td>
                         <td>{{ value['des_indices'][0] }}</td>
                         <td>{{ value['des_indices'][1] }}</td>
-                        <td>{{ value['ds_name'][0][0] }} ({{ value['ds_name'][0][1] }})</td>
+                        <td>{{ value['ds_name'][0] }} ({{ value['ds_name'][1] }})</td>
                         <td><button type="button" class="btn btn-danger btn-sm"
-                            onclick="window.location.href='{{ url_for('delete', record=key) }}'"
+                            onclick="window.location.href='{{ url_for('main.delete', record=key) }}'"
                             title="Click to delete this search">
                             <span class="glyphicon glyphicon-trash"></span></button></td>
                     </tr>
