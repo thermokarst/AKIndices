@@ -1,5 +1,4 @@
 from app import db
-from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.sql import text
 from flask import abort
 

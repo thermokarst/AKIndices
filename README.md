@@ -16,32 +16,10 @@ Prerequisites
 
 - [AKExtract](http://github.com/thermokarst/akextract)
 - Flask (0.10.1)
-- SQLAlchemy (0.8.2)
-- psycopg2 (2.5.1)
-- flask-wtf (0.9.1)
+- SQLAlchemy (1.0.5)
+- psycopg2 (2.6.1)
+- flask-wtf (0.12)
 - PostgreSQL (9.4+)
-
-
-Installation
-------------
-
-1) Clone the repo:
-
-    $ git clone https://github.com/thermokarst/akindices
-
-2) Get the data from http://snap.uaf.edu
-
-3) Copy `config.py.default` to `config.py`, edit the parameters to suit your needs.
-
-4) Launch a python interpreter and populate the database with data:
-
-    $ python
-    >>> import akindices
-    >>> akindices.database.init_db()
-
-5) Launch the application with:
-
-    $ ./run.py
 
 
 Contact

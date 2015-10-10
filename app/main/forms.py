@@ -1,7 +1,6 @@
 from flask_wtf import Form
 from wtforms import IntegerField, SelectField
 from wtforms.validators import NumberRange, Required
-from sqlalchemy import func
 
 
 class AKIYearField(IntegerField):

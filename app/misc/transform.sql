@@ -77,19 +77,3 @@ SELECT c.name, c.latitude, c.longitude, c.northing, c.easting, t.data
 INTO new_communities
 FROM temp05 t
 INNER JOIN communities c ON c.id=t.community_id;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-select distinct on (doc->'model', doc->'datatype', doc->'scenario') doc->'model', doc->'datatype', doc->'scenario' from new_communities c, jsonb_array_elements(c.data) with ordinality t1(doc, rn);

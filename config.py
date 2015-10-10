@@ -28,12 +28,3 @@ config = {
 
     'default': DevelopmentConfig
 }
-
-#  WITH x AS (
-#     SELECT name, jsonb_array_elements(data) AS data
-#     FROM temps06
-#     WHERE name='Anchorage')
-# SELECT d.key::INTEGER AS year, d.value AS temperatures
-# FROM x, jsonb_each(data) d
-# WHERE data->>'model'='CRU'
-# AND d.key NOT IN ('model', 'datatype', 'scenario', 'modelname', 'resolution');
