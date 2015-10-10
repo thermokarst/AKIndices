@@ -70,5 +70,13 @@ def des_air_indices(indices):
 def c_to_f(temp):
     return (temp * 9. / 5.) + 32.
 
+
 def communitiesSelect():
     return [(c.id, c.name) for c in DB.getCommunities()]
+
+
+def datasetsSelect():
+    return [("{0.model},{0.scenario}".format(d),
+        "{x} ({d.resolution}) - {d.modelname} {d.scenario}".format(d=d,
+                                                                   x=d.datatype.title()))
+        for d in DB.getDatasets()]

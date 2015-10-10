@@ -19,7 +19,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="modelinput">Dataset</label>
-                {{ render_field(form.model, class='form-control', id='modelinput') }}
+                {{ render_field(form.dataset, class='form-control', id='modelinput') }}
                     <small>Historical (1901-2009) or Projection (2001-2099)<br>
                     <a href="{{ url_for('main.datatypes') }}" target="_blank">
                     Learn more about the models and scenarios

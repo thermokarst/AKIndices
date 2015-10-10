@@ -62,3 +62,35 @@ class DB:
             """
         result = db.engine.execute(text(cmd), id=id).fetchall()
         return result or abort(500)
+
+    @classmethod
+    def getDatasets(cls):
+        cmd = """
+            SELECT DISTINCT ON (
+                doc->'model',
+                doc->'datatype',
+                doc->'resolution',
+                doc->'modelname',
+                doc->'scenario'
+            )
+                doc->'model' AS model,
+                doc->'datatype' AS datatype,
+                doc->'resolution' AS resolution,
+                doc->'modelname' AS modelname,
+                doc->'scenario' AS scenario
+            FROM new_communities c,
+                jsonb_array_elements(c.data)
+                WITH ORDINALITY t1(doc, rn)
+            ORDER BY datatype ASC, modelname ASC, scenario ASC;
+            """
+        result = db.engine.execute(text(cmd), id=id).fetchall()
+        return result or abort(500)
+
+# WITH x AS (
+#     SELECT name, jsonb_array_elements(data) AS data
+#     FROM new_communities
+#     WHERE name='Anchorage')
+# SELECT d.key::INTEGER AS year, d.value AS temperatures
+# FROM x, jsonb_each(data) d
+# WHERE data->>'model'='CRU'
+# AND d.key NOT IN ('model', 'datatype', 'scenario', 'modelname', 'resolution');

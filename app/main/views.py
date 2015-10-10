@@ -2,17 +2,18 @@ from numpy import arange, hstack
 
 from flask import session, render_template, request, redirect, url_for
 
+from flask import current_app
+
 from . import main
 from .forms import AKIForm
 from .utils import getTemps, avg_air_temp, ann_air_indices, \
-    avg_air_indices, des_air_indices, communitiesSelect
+    avg_air_indices, des_air_indices, communitiesSelect, datasetsSelect
 from .models import Dataset, DB
 
 
 @main.route('/', methods=['GET'])
 def index():
-    form = AKIForm()
-    form.community.choices = communitiesSelect()
+    form = generateForm()
     session['community_data'] = None
     session['avg_temp'] = None
     session['avg_indices'] = None
@@ -48,8 +49,7 @@ def index():
 
 @main.route('/', methods=['POST'])
 def index_submit():
-    form = AKIForm()
-    form.community.choices = communitiesSelect()
+    form = generateForm()
     if form.validate():
         session['community'] = request.form['community']
         session['minyear'] = request.form['minyear']
@@ -57,12 +57,15 @@ def index_submit():
         if session['minyear'] > session['maxyear']:
             session['maxyear'] = session['minyear']
 
-        session['datasets'] = request.form['model']
+        session['datasets'] = request.form['dataset']
+        current_app.logger.info(session)
         return redirect(url_for('main.index'))
     else:
+        # TODO: Fix post-POST handling
         return render_template('main/index.html', form=form)
 
 
+# TODO: reimport this template
 @main.route('/datatypes')
 def datatypes():
     return render_template('main/datatypes.html')
@@ -121,3 +124,10 @@ def delete():
     record = request.args.get('record', '')
     session['save'].pop(record)
     return redirect(url_for('main.index'))
+
+
+def generateForm():
+    form = AKIForm()
+    form.community.choices = communitiesSelect()
+    form.dataset.choices = datasetsSelect()
+    return form
