@@ -7,9 +7,22 @@ from .utils import getTemps, avg_air_temp, ann_air_indices, \
 from .models import DB
 
 
-@main.route('/', methods=['GET'])
+@main.route('/', methods=['GET', 'POST'])
 def index():
-    form = generateForm()
+    form = AKIForm()
+    form.community.choices = communitiesSelect()
+    form.dataset.choices = datasetsSelect()
+
+    if form.validate_on_submit():
+        session['community'] = request.form['community']
+        session['minyear'] = request.form['minyear']
+        session['maxyear'] = request.form['maxyear']
+        if session['minyear'] > session['maxyear']:
+            session['maxyear'] = session['minyear']
+
+        session['datasets'] = request.form['dataset']
+        return redirect(url_for('main.index'))
+
     session['community_data'] = None
     session['avg_temp'] = None
     session['avg_indices'] = None
@@ -37,23 +50,6 @@ def index():
             session['des_indices'] = des_air_indices(indices)
 
     return render_template('main/index.html', form=form)
-
-
-@main.route('/', methods=['POST'])
-def index_submit():
-    form = generateForm()
-    if form.validate():
-        session['community'] = request.form['community']
-        session['minyear'] = request.form['minyear']
-        session['maxyear'] = request.form['maxyear']
-        if session['minyear'] > session['maxyear']:
-            session['maxyear'] = session['minyear']
-
-        session['datasets'] = request.form['dataset']
-        return redirect(url_for('main.index'))
-    else:
-        # TODO: Fix post-POST handling
-        return render_template('main/index.html', form=form)
 
 
 @main.route('/datatypes')
@@ -111,10 +107,3 @@ def delete():
     record = request.args.get('record', '')
     session['save'].pop(record)
     return redirect(url_for('main.index'))
-
-
-def generateForm():
-    form = AKIForm()
-    form.community.choices = communitiesSelect()
-    form.dataset.choices = datasetsSelect()
-    return form
