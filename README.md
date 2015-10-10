@@ -19,8 +19,7 @@ Prerequisites
 - SQLAlchemy (0.8.2)
 - psycopg2 (2.5.1)
 - flask-wtf (0.9.1)
-- numpy (1.7.1)
-- PostgreSQL
+- PostgreSQL (9.4+)
 
 
 Installation

@@ -14,37 +14,37 @@
     <table class="table table-hover table-condensed table-bordered">
         <thead>
             <tr>
-                <th>Year<br>&nbsp;</th>
-                <th>January<br>&deg;C</th>
-                <th>February<br>&deg;C</th>
-                <th>March<br>&deg;C</th>
-                <th>April<br>&deg;C</th>
-                <th>May<br>&deg;C</th>
-                <th>June<br>&deg;C</th>
-                <th>July<br>&deg;C</th>
-                <th>August<br>&deg;C</th>
-                <th>September<br>&deg;C</th>
-                <th>October<br>&deg;C</th>
-                <th>November<br>&deg;C</th>
-                <th>December<br>&deg;C</th>
+                <th class="col-md-1">Year<br>&nbsp;</th>
+                <th class="col-md-1">January<br>&deg;C</th>
+                <th class="col-md-1">February<br>&deg;C</th>
+                <th class="col-md-1">March<br>&deg;C</th>
+                <th class="col-md-1">April<br>&deg;C</th>
+                <th class="col-md-1">May<br>&deg;C</th>
+                <th class="col-md-1">June<br>&deg;C</th>
+                <th class="col-md-1">July<br>&deg;C</th>
+                <th class="col-md-1">August<br>&deg;C</th>
+                <th class="col-md-1">September<br>&deg;C</th>
+                <th class="col-md-1">October<br>&deg;C</th>
+                <th class="col-md-1">November<br>&deg;C</th>
+                <th class="col-md-1">December<br>&deg;C</th>
             </tr>
         </thead>
         <tbody>
            {% for temp in temps %}
                 <tr>
-                    <td>{{ temp[0]|int }}</td>
-                    <td>{{ temp[1]|round(2) }}</td>
-                    <td>{{ temp[2]|round(2) }}</td>
-                    <td>{{ temp[3]|round(2) }}</td>
-                    <td>{{ temp[4]|round(2) }}</td>
-                    <td>{{ temp[5]|round(2) }}</td>
-                    <td>{{ temp[6]|round(2) }}</td>
-                    <td>{{ temp[7]|round(2) }}</td>
-                    <td>{{ temp[8]|round(2) }}</td>
-                    <td>{{ temp[9]|round(2) }}</td>
-                    <td>{{ temp[10]|round(2) }}</td>
-                    <td>{{ temp[11]|round(2) }}</td>
-                    <td>{{ temp[12]|round(2) }}</td>
+                    <td>{{ temp[0] }}</td>
+                    <td>{{ temp[1][0] }}</td>
+                    <td>{{ temp[1][1] }}</td>
+                    <td>{{ temp[1][2] }}</td>
+                    <td>{{ temp[1][3] }}</td>
+                    <td>{{ temp[1][4] }}</td>
+                    <td>{{ temp[1][5] }}</td>
+                    <td>{{ temp[1][6] }}</td>
+                    <td>{{ temp[1][7] }}</td>
+                    <td>{{ temp[1][8] }}</td>
+                    <td>{{ temp[1][9] }}</td>
+                    <td>{{ temp[1][10] }}</td>
+                    <td>{{ temp[1][11] }}</td>
                 </tr>
        {% endfor %}
    </tbody>

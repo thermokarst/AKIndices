@@ -1,5 +1,3 @@
-from numpy import arange, hstack
-
 from flask import session, render_template, request, redirect, url_for
 
 from . import main
@@ -76,10 +74,7 @@ def details():
     community_id = request.args.get('community_id', '')
     minyear = request.args.get('minyear', '')
     maxyear = request.args.get('maxyear', '')
-    temps = getTemps(datasets, community_id, minyear, maxyear)
-    years = arange(int(minyear),
-                   int(maxyear)+1).reshape(int(maxyear)-int(minyear) + 1, 1)
-    temps = hstack((years, temps))
+    temps = getTemps(session)
     return render_template('main/details.html',
                            lat=request.args.get('lat', ''),
                            lon=request.args.get('lon', ''),
