@@ -56,7 +56,6 @@ def index_submit():
         return render_template('main/index.html', form=form)
 
 
-# TODO: reimport this template
 @main.route('/datatypes')
 def datatypes():
     return render_template('main/datatypes.html')
