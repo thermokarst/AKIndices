@@ -70,11 +70,11 @@ def reset():
 
 @main.route('/details')
 def details():
-    datasets = request.args.get('datasets', '')
-    community_id = request.args.get('community_id', '')
-    minyear = request.args.get('minyear', '')
-    maxyear = request.args.get('maxyear', '')
-    temps = getTemps(session)
+    temps = getTemps({'datasets': request.args.get('datasets', ''),
+                     'minyear': request.args.get('minyear', ''),
+                     'maxyear': request.args.get('maxyear', ''),
+                     'community_data': {'id': request.args.get('community_id', '')}
+    })
     return render_template('main/details.html',
                            lat=request.args.get('lat', ''),
                            lon=request.args.get('lon', ''),

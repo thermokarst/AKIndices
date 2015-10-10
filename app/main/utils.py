@@ -2,11 +2,11 @@ from .models import DB
 
 
 def getTemps(session):
-    model, scenario = session['datasets'].split(',')
+    modelname, scenario = session['datasets'].split(',')
     data = DB.getTemps(session['minyear'],
                        session['maxyear'],
                        session['community_data']['id'],
-                       model,
+                       modelname,
                        scenario)
     return data
 

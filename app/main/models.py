@@ -4,44 +4,6 @@ from sqlalchemy.sql import text
 from flask import abort
 
 
-class Dataset(db.Model):
-    __tablename__ = 'datasets'
-
-    id = db.Column(db.Integer, primary_key=True)
-    datatype = db.Column(db.String(15), nullable=False)
-    model = db.Column(db.String(15), nullable=False)
-    modelname = db.Column(db.String(50), nullable=False)
-    scenario = db.Column(db.String(15), nullable=False)
-    resolution = db.Column(db.String(15), nullable=False)
-    temperatures = db.relationship('Temperature', backref='datasets')
-
-    @hybrid_property
-    def type(self):
-        return self.datatype.lower().capitalize()
-
-
-class Temperature(db.Model):
-    __tablename__ = 'temperatures'
-
-    id = db.Column(db.Integer, primary_key=True)
-    dataset_id = db.Column(db.Integer, db.ForeignKey('datasets.id'))
-    community_id = db.Column(db.Integer, db.ForeignKey('communities.id'))
-    year = db.Column(db.Integer, nullable=False)
-    january = db.Column(db.Float, nullable=False)
-    february = db.Column(db.Float, nullable=False)
-    march = db.Column(db.Float, nullable=False)
-    april = db.Column(db.Float, nullable=False)
-    may = db.Column(db.Float, nullable=False)
-    june = db.Column(db.Float, nullable=False)
-    july = db.Column(db.Float, nullable=False)
-    august = db.Column(db.Float, nullable=False)
-    september = db.Column(db.Float, nullable=False)
-    october = db.Column(db.Float, nullable=False)
-    november = db.Column(db.Float, nullable=False)
-    december = db.Column(db.Float, nullable=False)
-    updated = db.Column(db.DateTime, nullable=True)
-
-
 class DB:
     @classmethod
     def getCommunity(cls, id):
@@ -67,13 +29,11 @@ class DB:
     def getDatasets(cls):
         cmd = """
             SELECT DISTINCT ON (
-                doc->'model',
                 doc->'datatype',
                 doc->'resolution',
                 doc->'modelname',
                 doc->'scenario'
             )
-                doc->'model' AS model,
                 doc->'datatype' AS datatype,
                 doc->'resolution' AS resolution,
                 doc->'modelname' AS modelname,
@@ -87,22 +47,22 @@ class DB:
         return result or abort(500)
 
     @classmethod
-    def getTemps(cls, start, end, community_id, model, scenario):
+    def getTemps(cls, start, end, community_id, modelname, scenario):
         years = [str(x) for x in range(int(start), int(end)+1)]
         cmd = """
             WITH x AS (
                 SELECT name, jsonb_array_elements(data) AS data
                 FROM new_communities
                 WHERE id=:community_id)
-            SELECT d.key::INTEGER AS year, d.value AS temperatures
+            SELECT d.key AS year, d.value AS temperatures
             FROM x, jsonb_each(data) d
-            WHERE data->>'model'=:model
+            WHERE data->>'modelname'=:modelname
             AND data->>'scenario'=:scenario
             AND d.key IN :years;
             """
         result = db.engine.execute(text(cmd),
                                    community_id=community_id,
-                                   model=model,
+                                   modelname=modelname,
                                    scenario=scenario,
                                    years=tuple(years)).fetchall()
         return result or abort(500)

@@ -137,7 +137,7 @@
                         <td>{{ value['avg_indices'][1] }}</td>
                         <td>{{ value['des_indices'][0] }}</td>
                         <td>{{ value['des_indices'][1] }}</td>
-                        <td>{{ value['ds_name'][0][0] }} ({{ value['ds_name'][0][1] }})</td>
+                        <td>{{ value['ds_name'][0] }} ({{ value['ds_name'][1] }})</td>
                         <td><button type="button" class="btn btn-danger btn-sm"
                             onclick="window.location.href='{{ url_for('main.delete', record=key) }}'"
                             title="Click to delete this search">
