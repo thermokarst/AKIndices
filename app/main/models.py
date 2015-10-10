@@ -83,14 +83,26 @@ class DB:
                 WITH ORDINALITY t1(doc, rn)
             ORDER BY datatype ASC, modelname ASC, scenario ASC;
             """
-        result = db.engine.execute(text(cmd), id=id).fetchall()
+        result = db.engine.execute(text(cmd)).fetchall()
         return result or abort(500)
 
-# WITH x AS (
-#     SELECT name, jsonb_array_elements(data) AS data
-#     FROM new_communities
-#     WHERE name='Anchorage')
-# SELECT d.key::INTEGER AS year, d.value AS temperatures
-# FROM x, jsonb_each(data) d
-# WHERE data->>'model'='CRU'
-# AND d.key NOT IN ('model', 'datatype', 'scenario', 'modelname', 'resolution');
+    @classmethod
+    def getTemps(cls, start, end, community_id, model, scenario):
+        years = [str(x) for x in range(int(start), int(end)+1)]
+        cmd = """
+            WITH x AS (
+                SELECT name, jsonb_array_elements(data) AS data
+                FROM new_communities
+                WHERE id=:community_id)
+            SELECT d.key::INTEGER AS year, d.value AS temperatures
+            FROM x, jsonb_each(data) d
+            WHERE data->>'model'=:model
+            AND data->>'scenario'=:scenario
+            AND d.key IN :years;
+            """
+        result = db.engine.execute(text(cmd),
+                                   community_id=community_id,
+                                   model=model,
+                                   scenario=scenario,
+                                   years=tuple(years)).fetchall()
+        return result or abort(500)

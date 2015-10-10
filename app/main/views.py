@@ -2,13 +2,11 @@ from numpy import arange, hstack
 
 from flask import session, render_template, request, redirect, url_for
 
-from flask import current_app
-
 from . import main
 from .forms import AKIForm
 from .utils import getTemps, avg_air_temp, ann_air_indices, \
     avg_air_indices, des_air_indices, communitiesSelect, datasetsSelect
-from .models import Dataset, DB
+from .models import DB
 
 
 @main.route('/', methods=['GET'])
@@ -31,9 +29,8 @@ def index():
                 'longitude': round(community['longitude'], 5),
             }
 
-            session['ds_name'] = Dataset.query. \
-                with_entities(Dataset.modelname, Dataset.scenario). \
-                filter_by(id=session['datasets']).all()
+            session['ds_name'] = session['datasets'].split(',')
+
             temps_arr = getTemps(session['datasets'],
                                  community_id,
                                  session['minyear'],
@@ -58,7 +55,6 @@ def index_submit():
             session['maxyear'] = session['minyear']
 
         session['datasets'] = request.form['dataset']
-        current_app.logger.info(session)
         return redirect(url_for('main.index'))
     else:
         # TODO: Fix post-POST handling
