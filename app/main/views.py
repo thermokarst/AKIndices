@@ -31,10 +31,7 @@ def index():
 
             session['ds_name'] = session['datasets'].split(',')
 
-            temps_arr = getTemps(session['datasets'],
-                                 community_id,
-                                 session['minyear'],
-                                 session['maxyear'])
+            temps_arr = getTemps(session)
 
             session['avg_temp'] = avg_air_temp(temps_arr)
             indices = ann_air_indices(temps_arr)

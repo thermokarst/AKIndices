@@ -3,9 +3,13 @@ import numpy
 from .models import DB
 
 
-def getTemps(datasets, community_id, minyear, maxyear):
-    model, scenario = datasets.split(',')
-    data = DB.getTemps(minyear, maxyear, community_id, model, scenario)
+def getTemps(session):
+    model, scenario = session['datasets'].split(',')
+    data = DB.getTemps(session['minyear'],
+                       session['maxyear'],
+                       session['community_data']['id'],
+                       model,
+                       scenario)
     return data
 
 
