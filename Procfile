@@ -1,2 +1,2 @@
-web: gunicorn -w 4 -b 0.0.0.0:8000 manage:app
+web: gunicorn -w 4 manage:app --log-file=-
 init: python manage.py initdb
