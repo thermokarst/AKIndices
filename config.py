@@ -23,8 +23,16 @@ class DevelopmentConfig(Config):
         'postgres://matthew@localhost/akindices'
 
 
+class HerokuConfig(Config):
+    DEBUG = False
+    TITLE = 'AKIndices'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'top secret'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+
+
 config = {
     'development': DevelopmentConfig,
+    'heroku': HerokuConfig,
 
     'default': DevelopmentConfig
 }
