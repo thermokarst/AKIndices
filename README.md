@@ -7,14 +7,14 @@ parameters.
 What is it?
 -----------
 
-[AKIndices](http://akindices.akdillon.net) is a Flask-driven web-app that
+[AKIndices](https://akindices.akdillon.net) is a Flask-driven web-app that
 builds on the AKExtract project to provide an easy-to-use interface for working
 with SNAP datasets.
 
 Prerequisites
 -------------
 
-- [AKExtract](http://github.com/thermokarst/akextract)
+- [AKExtract](https://github.com/thermokarst/akextract)
 - Flask (0.10.1)
 - SQLAlchemy (1.0.5)
 - psycopg2 (2.6.1)
@@ -26,4 +26,4 @@ Contact
 -------
 
 Do you have an idea for a feature? Find a bug?
-Reach me at [mrdillon@alaska.edu](mailto:mrdillon@alaska.edu)
+Reach me at [matthew@akdillon.net](mailto:matthew@akdillon.net)

@@ -6,7 +6,7 @@ class Config:
     APP_NAME = 'AKIndices'
     APP_VERSION = '0.2.0'
     TITLE = 'AKIndices'
-    COPYRIGHT_YEAR = 2015
+    COPYRIGHT_YEAR = 2021
     CSRF_ENABLED = True
     DEBUG = False
 
